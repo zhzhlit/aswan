@@ -2,6 +2,8 @@
 
 cur_dir=`pwd`
 
+ps -ef|grep 'risk_server' | grep -v 'grep' | awk '{print $2}' | xargs kill -9
+
 ## 启动管理后台(调试用，不要用于生产)
 nohup python3 ${cur_dir}/www/manage.py runserver &
 
