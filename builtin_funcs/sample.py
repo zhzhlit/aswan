@@ -7,6 +7,7 @@ from builtin_funcs import BuiltInFuncs
                        args_type_tuple=(('user_id', str),),
                        supported_ops=('is', 'is_not'))
 def is_abnormal(req_body):
+    return None
     user_id = req_body['user_id']
     user_key = user_id[-1]
 
@@ -28,6 +29,8 @@ def is_abnormal(req_body):
                        threshold_trans_func=int
                        )
 def user_login_count(req_body):
+    return None
+
     user_id = req_body['user_id']
     user_key = user_id[-1]
 
