@@ -114,7 +114,7 @@ class Source(object):
         return True
 
     def check_timestamp(self, data):
-        return 'timestamp' in data and len(data['timestamp']) == 13
+        return 'timestamp' in data and len(data['timestamp']) == 10
 
     def check_all(self, data):
         return (self.check_key(data) and
