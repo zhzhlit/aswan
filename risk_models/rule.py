@@ -213,7 +213,7 @@ def calculate_rule(id_, req_body, rules=None, ac=None):
         ac.incr(id_)
         ac.persist()
 
-    rv_control, rv_weight, result_seted, hit_number = 'pass', 0, False, 0
+    rv_control, rv_weight, result_seted, hit_number, rv_custom = 'pass', 0, False, 0, ''
 
     for (funcs, control, custom, group_name, group_uuid,
          weight) in rules.get_callable_list(id_):
@@ -234,7 +234,7 @@ def calculate_rule(id_, req_body, rules=None, ac=None):
         # 目前策略为过全部策略原子组以积累数据，若无此需求，可自行进行短路
         if all(results):
             if not result_seted:
-                rv_control, rv_weight, result_seted = control, weight, True
+                rv_control, rv_weight, result_seted, rv_custom = control, weight, True, custom
 
             # 当前命中的策略组在此规则中是第几个命中的
             hit_number += 1
@@ -248,4 +248,4 @@ def calculate_rule(id_, req_body, rules=None, ac=None):
                                   group_uuid=group_uuid,
                                   hit_number=hit_number))
             hit_logger.info(msg)
-    return rv_control, rv_weight
+    return rv_control, rv_weight, rv_custom
